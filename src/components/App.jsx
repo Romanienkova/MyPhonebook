@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 
-import Section from './components/Section/Section';
-import ContactForm from './components/ContactForm/ContactForm';
-import ContactList from './components/ContactList/ContactList';
-import Filter from './components/Filter/Filter';
+import Section from './Section/Section';
+import ContactForm from './ContactForm/ContactForm';
+import ContactList from './ContactList/ContactList';
+import Filter from './Filter/Filter';
 
 export class App extends Component {
   state = {
@@ -17,7 +17,23 @@ export class App extends Component {
     filter: '',
   };
 
-  saveContacts = ({ name, number }) => {
+  componentDidMount() {
+    const savedContacts = JSON.parse(localStorage.getItem('contacts'));
+    if (savedContacts) {
+      this.setState({
+        contacts: savedContacts,
+      });
+    }
+	};
+	
+  componentDidUpdate(_, prevState) {
+	  if (prevState.contacts !== this.state.contacts) {
+		 const stringifiedContacts = JSON.stringify(this.state.contacts);
+		 localStorage.setItem('contacts', stringifiedContacts);
+	 }
+  };
+
+  addContacts = ({ name, number }) => {
     if (
       this.state.contacts.some(
         el => el.name.toLowerCase().trim() === name.toLowerCase().trim()
@@ -62,7 +78,7 @@ export class App extends Component {
     return (
       <main>
         <Section title="Phonebook">
-          <ContactForm onSubmit={this.saveContacts} />
+          <ContactForm onSubmit={this.addContacts} />
         </Section>
         <Section title="Contacts">
           <Filter setFilter={this.setFilter} filterState={this.state.filter} />
