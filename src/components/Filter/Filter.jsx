@@ -1,25 +1,21 @@
-import PropTypes from 'prop-types';
-
+import propTypes from 'prop-types';
 import { StyledFilter } from './Filter.styled';
 
-
-const Filter = ({ setFilter, filterState }) => {
+export const Filter = ({ filter, handleFilterChange }) => {
   return (
     <StyledFilter>
       <p>Find contacts by name</p>
       <input
         type="text"
         name="filter"
-        value={filterState}
-        onChange={setFilter}
+        value={filter}
+        onChange={handleFilterChange}
       />
     </StyledFilter>
   );
 };
 
-export default Filter;
-
 Filter.propTypes = {
-  filterState: PropTypes.string,
-  setFilter: PropTypes.func,
+  filter: propTypes.string.isRequired,
+  handleFilterChange: propTypes.func.isRequired,
 };
