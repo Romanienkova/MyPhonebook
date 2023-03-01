@@ -1,10 +1,13 @@
 import styled from '@emotion/styled';
 
 export const StyledContactList = styled.ul`
-  padding-left: 18px;
-  list-style: disc;
+padding: 0;
 
   li {
+	display: flex;
+justify-content: space-between;
+gap: 16px;
+
     margin-bottom: 8px;
 
     span {
@@ -13,21 +16,15 @@ export const StyledContactList = styled.ul`
 
     button {
       margin-left: 16px;
-      padding: 4px;
-      height: 32px;
-      width: 120px;
-      background-color: #fff;
-      border: 2px solid #c2c2c2;
-      font-weight: 600;
-      color: #000;
+      background-color: transparent;
 
-      border-radius: 4px;
-      transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+      border: none;
+      color: #000;
+      transition: color 0.25s ease-in-out;
 
       :hover,
       :focus {
-        background-color: green;
-        color: #fff;
+        color: red;
       }
     }
   }
