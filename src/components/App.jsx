@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { selectContacts } from 'redux/contacts/selectors';
+import { selectContacts } from 'redux/selectors';
 import { ContactList, ContactForm, Section, Filter } from 'components';
 
 export function App() {
