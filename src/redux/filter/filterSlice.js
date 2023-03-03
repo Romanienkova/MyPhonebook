@@ -5,11 +5,8 @@ const initialState = {
 };
 
 const filterSlice = createSlice({
-  // Ім'я слайсу
   name: 'filter',
-  // Початковий стан редюсера слайсу
   initialState,
-  // Об'єкт редюсерів
   reducers: {
     addFilter(state, { payload }) {
       state.value = payload;
@@ -17,7 +14,5 @@ const filterSlice = createSlice({
   },
 });
 
-// Генератори екшенів
 export const { addFilter } = filterSlice.actions;
-// Редюсер слайсу
 export const filterReducer = filterSlice.reducer;
