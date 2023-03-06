@@ -30,6 +30,7 @@
 .label {
   display: contents;
   color: #2b3e2a9c;
+  font-size: 16px;
 }
 .buttonSub {
   border-radius: 10px;

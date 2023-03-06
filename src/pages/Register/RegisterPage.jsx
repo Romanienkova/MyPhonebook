@@ -7,7 +7,7 @@ import {
 
 import c from '../Login/LoginPage.module.css';
 
-export default function Register() {
+export default function RegisterPage() {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

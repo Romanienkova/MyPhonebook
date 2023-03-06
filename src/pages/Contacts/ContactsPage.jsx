@@ -7,14 +7,20 @@ import { ContactList } from 'components/ContactList/ContactList';
 import { Loader } from 'components/Loader/Loader';
 
 import { fetchContacts } from 'redux/contacts/operations';
-import { selectError, selectIsLoading } from 'redux/contacts/selectors';
+import {
+  selectError,
+  selectIsLoading,
+  selectContacts,
+} from 'redux/contacts/selectors';
 
 import s from 'components/App.module.css';
 
-const Contact = () => {
+const ContactsPage = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
+	const error = useSelector(selectError);
+  const contacts = useSelector(selectContacts);
+	
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -29,10 +35,14 @@ const Contact = () => {
 
       <h2 className={s.title}>Contacts</h2>
 
-      <Filter />
+      {contacts.length > 0 && <Filter />}
 
-      {<ContactList /> ?? <p> Yoy</p>}
+      {contacts.length === 0 ? (
+        <p>You don't have contacts yet...</p>
+      ) : (
+        <ContactList />
+      )}
     </div>
   );
 };
-export default Contact;
+export default ContactsPage;

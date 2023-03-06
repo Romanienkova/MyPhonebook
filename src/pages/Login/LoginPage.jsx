@@ -5,7 +5,7 @@ import { logIn } from 'redux/auth/operations';
 
 import c from './LoginPage.module.css';
 
-export default function Login() {
+export default function LoginPage() {
 	const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');

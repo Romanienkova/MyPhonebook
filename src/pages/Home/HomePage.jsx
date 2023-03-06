@@ -1,6 +1,6 @@
 import c from './HomePage.module.css';
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div className={c.container}>
       <h1>

@@ -10,10 +10,10 @@ import { currentUser } from '../redux/auth/operations';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
-const Home = lazy(() => import('../pages/Home/HomePage'));
-const Contacts = lazy(() => import('../pages/Contacts/ContactsPage'));
-const Register = lazy(() => import('../pages/Register/RegisterPage'));
-const Login = lazy(() => import('../pages/Login/LoginPage'));
+const LazyHome = lazy(() => import('../pages/Home/HomePage'));
+const LazyContacts = lazy(() => import('../pages/Contacts/ContactsPage'));
+const LazyRegister = lazy(() => import('../pages/Register/RegisterPage'));
+const LazyLogin = lazy(() => import('../pages/Login/LoginPage'));
 
 export const App = () => {
   const { isRefreshing } = useAuth();
@@ -28,18 +28,18 @@ export const App = () => {
       <>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route index element={<LazyHome />} />
 
             <Route element={<PublicRoute />}>
-              <Route path="/login" element={<Login />} restricted />
+              <Route path="/login" element={<LazyLogin />} restricted />
             </Route>
 
             <Route element={<PublicRoute />} restricted>
-              <Route path="/register" element={<Register />} />
+              <Route path="/register" element={<LazyRegister />} />
             </Route>
 
             <Route element={<PrivateRoute />}>
-              <Route path="/contacts" element={<Contacts />}></Route>
+              <Route path="/contacts" element={<LazyContacts />}></Route>
             </Route>
 
             <Route path="*" element={<Navigate to="/" />} />
