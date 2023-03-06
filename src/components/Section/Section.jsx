@@ -1,15 +1,15 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-import { SectionStyle, Title } from './Section.styled';
+// import { SectionStyle, Title } from './Section.styled';
 
-export const Section = ({ title, children }) => (
-  <SectionStyle>
-    <Title>{title}</Title>
-    {children}
-  </SectionStyle>
-);
+// export const Section = ({ title, children }) => (
+//   <SectionStyle>
+//     <Title>{title}</Title>
+//     {children}
+//   </SectionStyle>
+// );
 
-Section.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-};
+// Section.propTypes = {
+//   title: PropTypes.string.isRequired,
+//   children: PropTypes.node.isRequired,
+// };

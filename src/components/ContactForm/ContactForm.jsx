@@ -1,18 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix';
 
-import { selectContacts } from 'redux/selectors';
-import { addContact } from 'redux/operations';
+import { fetchContacts, addContact } from 'redux/contacts/operations';
+import { selectContacts } from 'redux/contacts/selectors';
 
-import { StyledForm, StyledInput, ButtonAdd } from './ContactForm.styled';
+// import { StyledForm, StyledInput, ButtonAdd } from './ContactForm.styled';
+import s from '../App.module.css';
 
-export function ContactForm() {
+export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const items = useSelector(selectContacts);
 
-  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const handleChange = ({ target }) => {
     if (target.name === 'name') {
@@ -27,9 +32,7 @@ export function ContactForm() {
     e.preventDefault();
 
     if (
-      contacts.some(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      )
+      items.some(contact => contact.name.toLowerCase() === name.toLowerCase())
     ) {
       Notify.failure(`${name} is already in contacts!`);
       return;
@@ -44,11 +47,12 @@ export function ContactForm() {
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={s.form}>
       <label htmlFor="name">
-        <p>Name</p>
+        <p className={s.subtitle}>Name</p>
       </label>
-      <StyledInput
+      <input
+        className={s.input}
         onChange={handleChange}
         value={name}
         type="text"
@@ -61,9 +65,10 @@ export function ContactForm() {
       />
 
       <label htmlFor="number">
-        <p>Number</p>
+        <p className={s.subtitle}>Number</p>
       </label>
-      <StyledInput
+      <input
+        className={s.input}
         onChange={handleChange}
         value={number}
         type="tel"
@@ -73,7 +78,9 @@ export function ContactForm() {
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
       />
-      <ButtonAdd type="submit">Add contact</ButtonAdd>
-    </StyledForm>
+      <button className={s.buttonSub} type="submit">
+        Add contact
+      </button>
+    </form>
   );
-}
+};

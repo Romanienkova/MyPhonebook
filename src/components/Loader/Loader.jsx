@@ -11,8 +11,8 @@ export const Loader = () => {
         width={100}
         strokeWidth={5}
         strokeWidthSecondary={5}
-        color="green"
-        secondaryColor="white"
+        color="#7fbf8e"
+        secondaryColor="#6e837c"
       />
     </Overlay>
   );

@@ -1,30 +1,51 @@
+import { lazy } from 'react';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Navigate, Routes, Route } from 'react-router-dom';
 
-import { fetchContacts } from 'redux/operations';
-import { getIsLoading, selectContacts } from 'redux/selectors';
+import { Layout } from './index';
+import { useAuth } from '../hooks/useAuth';
+import { currentUser } from '../redux/auth/operations';
 
-import { ContactList, ContactForm, Section, Filter, Loader } from 'components';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
-export function App() {
-  const contacts = useSelector(selectContacts);
-  const isLoading = useSelector(getIsLoading);
+const Home = lazy(() => import('../pages/Home/HomePage'));
+const Contacts = lazy(() => import('../pages/Contacts/ContactsPage'));
+const Register = lazy(() => import('../pages/Register/RegisterPage'));
+const Login = lazy(() => import('../pages/Login/LoginPage'));
+
+export const App = () => {
+  const { isRefreshing } = useAuth();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(currentUser());
   }, [dispatch]);
 
   return (
-    <main>
-      {isLoading && <Loader />}
-      <Section title="Phonebook">
-        <ContactForm />
-      </Section>
-      <Section title="Contacts">
-        {contacts.length > 0 && <Filter />}
-        {!contacts.length ? <p>You don't have contacts yet!</p> : <ContactList />}
-      </Section>
-    </main>
+    !isRefreshing && (
+      <>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+
+            <Route element={<PublicRoute />}>
+              <Route path="/login" element={<Login />} restricted />
+            </Route>
+
+            <Route element={<PublicRoute />} restricted>
+              <Route path="/register" element={<Register />} />
+            </Route>
+
+            <Route element={<PrivateRoute />}>
+              <Route path="/contacts" element={<Contacts />}></Route>
+            </Route>
+
+            <Route path="*" element={<Navigate to="/" />} />
+          </Route>
+        </Routes>
+      </>
+    )
   );
-}
+};

@@ -1,41 +1,41 @@
-import styled from '@emotion/styled';
+// import styled from '@emotion/styled';
 
-export const StyledContactList = styled.ul`
-padding: 0;
+// export const StyledContactList = styled.ul`
+// padding: 0;
 
-  li {
-	display: flex;
-justify-content: space-between;
-align-items: center;
+//   li {
+// 	display: flex;
+// justify-content: space-between;
+// align-items: center;
 
-gap: 16px;
+// gap: 16px;
 
-    margin-bottom: 8px;
+//     margin-bottom: 8px;
 
-    span {
-      font-size: 18px;
-    }
+//     span {
+//       font-size: 18px;
+//     }
 
-    button {
-		display: flex;
-justify-content: center;
-align-items: center;
-
-
-      margin-left: 16px;
-      background-color: transparent;
-min-width: 60px;
-height: 40px;
+//     button {
+// 		display: flex;
+// justify-content: center;
+// align-items: center;
 
 
-      border: none;
-      color: #000;
-      transition: color 0.25s ease-in-out;
+//       margin-left: 16px;
+//       background-color: transparent;
+// min-width: 60px;
+// height: 40px;
 
-      :hover,
-      :focus {
-        color: red;
-      }
-    }
-  }
-`;
+
+//       border: none;
+//       color: #000;
+//       transition: color 0.25s ease-in-out;
+
+//       :hover,
+//       :focus {
+//         color: red;
+//       }
+//     }
+//   }
+// `;
