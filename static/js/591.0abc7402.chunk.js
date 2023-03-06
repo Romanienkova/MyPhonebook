@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkMyPhonebook=self.webpackChunkMyPhonebook||[]).push([[591],{591:function(e,n,o){o.r(n),o.d(n,{default:function(){return r}});var s="HomePage_container__8GNiX",a="HomePage_span__jZFW7",c=o(3329);function r(){return(0,c.jsx)("div",{className:s,children:(0,c.jsxs)("h1",{children:["Phone",(0,c.jsx)("span",{className:a,children:"Book"})]})})}}}]);
+//# sourceMappingURL=591.0abc7402.chunk.js.map
