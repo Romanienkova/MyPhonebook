@@ -38,7 +38,7 @@ const ContactsPage = () => {
       {contacts.length > 0 && <Filter />}
 
       {contacts.length === 0 ? (
-        <p>You don't have contacts yet...</p>
+        <p>There is no one in the contact list yet!</p>
       ) : (
         <ContactList />
       )}

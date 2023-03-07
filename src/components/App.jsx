@@ -1,14 +1,15 @@
 import { lazy } from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
+import { Navigate, Routes, Route } from 'react-router-dom';
 
 import { Layout } from './index';
 import { useAuth } from '../hooks/useAuth';
 import { currentUser } from '../redux/auth/operations';
 
 import {PrivateRoute} from './PrivateRoute';
-import {PublicRoute} from './PublicRoute';
+import { PublicRoute } from './PublicRoute';
+import {Loader} from './Loader/Loader';
 
 const LazyHome = lazy(() => import('../pages/Home/HomePage'));
 const LazyContacts = lazy(() => import('../pages/Contacts/ContactsPage'));
@@ -23,41 +24,42 @@ export const App = () => {
     dispatch(currentUser());
   }, [dispatch]);
 
-  return (
-    !isRefreshing && (
-      <>
-        <Routes>
-          <Route path="/" redirectTo="/home" element={<Layout />}>
-            <Route index element={<LazyHome />} />
-            <Route
-              path="/register"
-              element={
-                <PublicRoute
-                  redirectTo="/contacts"
-                  component={<LazyRegister />}
-                />
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <PublicRoute redirectTo="/contacts" component={<LazyLogin />} />
-              }
-            />
-            <Route path="/home" element={<LazyHome />} />
-            <Route
-              path="/home"
-              element={<PrivateRoute component={<LazyHome />} />}
-            />
-            <Route
-              path="/contacts"
-              element={
-                <PrivateRoute redirectTo="/home" component={<LazyContacts />} />
-              }
-            />
-          </Route>
-        </Routes>
-      </>
-    )
+  return isRefreshing ? (
+    <Loader />
+  ) : (
+    <>
+      <Routes>
+        <Route path="/" redirectTo="/home" element={<Layout />}>
+          <Route index element={<LazyHome />} />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute
+                redirectTo="/contacts"
+                component={<LazyRegister />}
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute redirectTo="/contacts" component={<LazyLogin />} />
+            }
+          />
+          <Route path="/home" element={<LazyHome />} />
+          <Route
+            path="/home"
+            element={<PrivateRoute component={<LazyHome />} />}
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/home" component={<LazyContacts />} />
+            }
+          />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Route>
+      </Routes>
+    </>
   );
 };
