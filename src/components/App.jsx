@@ -46,7 +46,6 @@ export const App = () => {
               <PublicRoute redirectTo="/contacts" component={<LazyLogin />} />
             }
           />
-          <Route path="/home" element={<LazyHome />} />
           <Route
             path="/home"
             element={<PrivateRoute component={<LazyHome />} />}
@@ -54,7 +53,7 @@ export const App = () => {
           <Route
             path="/contacts"
             element={
-              <PrivateRoute redirectTo="/home" component={<LazyContacts />} />
+              <PrivateRoute redirectTo="/login" component={<LazyContacts />} />
             }
           />
           <Route path="*" element={<Navigate to="/" />} />
