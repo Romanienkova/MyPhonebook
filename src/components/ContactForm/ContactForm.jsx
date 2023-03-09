@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix';
 
-import { fetchContacts, addContact } from 'redux/contacts/operations';
+import { addContact } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/contacts/selectors';
 
-// import { StyledForm, StyledInput, ButtonAdd } from './ContactForm.styled';
 import s from '../App.module.css';
 
 export const ContactForm = () => {
@@ -14,10 +13,6 @@ export const ContactForm = () => {
   const items = useSelector(selectContacts);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
 
   const handleChange = ({ target }) => {
     if (target.name === 'name') {

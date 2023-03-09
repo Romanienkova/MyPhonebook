@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaRegTrashAlt } from 'react-icons/fa';
 
@@ -7,9 +6,8 @@ import {
   selectError,
   selectFilter,
 } from 'redux/contacts/selectors';
-import { deleteContact, fetchContacts } from 'redux/contacts/operations';
+import { deleteContact} from 'redux/contacts/operations';
 
-// import { StyledContactList } from './ContactList.styled';
 import s from '../App.module.css';
 
  export const ContactList = () => {
@@ -18,10 +16,6 @@ import s from '../App.module.css';
    const dispatch = useDispatch();
 
    const error = useSelector(selectError);
-
-   useEffect(() => {
-     dispatch(fetchContacts());
-   }, [dispatch]);
 
    const filterContacts = () => {
      if (filterName) {
